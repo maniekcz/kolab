@@ -1,0 +1,10 @@
+services:
+    projection_manager:
+        class: Prooph\EventStore\Pdo\Projection\MySqlProjectionManager
+        arguments: ['Prooph\EventStore\Pdo\MySqlEventStore', '@doctrine.pdo.connection']
+    projection.holiday:
+        class: RST\Holiday\Infrastructure\Projection\HolidayProjectionRunner
+        arguments: ['@projection_manager', '@doctrine.dbal.default_connection']
+    projection.finder.invitation:
+        class: RST\Holiday\Infrastructure\Projection\HolidayFinder
+        arguments: ['@doctrine.dbal.default_connection']
