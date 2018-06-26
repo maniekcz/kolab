@@ -36,7 +36,7 @@ class HolidayCreated extends AggregateChanged
         /** @var self $event */
         $event = self::occur($holidayId->toString(), [
             'state' => $state->toString(),
-            'start' => $start->format('YY-mm-dd')
+            'start' => $start->format('Y-m-d')
         ]);
 
         $event->holidayId = $holidayId;

@@ -1,0 +1,6 @@
+default:
+    resource: '@AppBundle/Controller/DefaultController.php'
+    type: annotation
+holiday:
+    resource: '@AppBundle/Controller/HolidayController.php'
+    type: annotation

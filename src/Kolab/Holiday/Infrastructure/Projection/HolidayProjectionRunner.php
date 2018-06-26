@@ -1,8 +1,9 @@
 <?php
 
-namespace RST\Invitation\Infrastructure\Projection;
+namespace Kolab\Holiday\Infrastructure\Projection;
 
 use Doctrine\DBAL\Connection;
+use Kolab\Holiday\Domain\Event\HolidayCreated;
 use Prooph\EventStore\Projection\ProjectionManager;
 use Kolab\Model\Projections;
 
@@ -32,16 +33,13 @@ class HolidayProjectionRunner implements Projections
             ->createProjection('holiday')
             ->fromAll()
             ->when([
-                InvitationWasCreated::class => function (array $state, InvitationWasCreated $event) use ($pdo) {
-                    $pdo->insert(Table::READ_INVITATION, [
-                        'id' => (string) $event->aggregateId(),
-                        'cycle_id' => (string) $event->cycleId(),
-                        'tester_id' => (string) $event->testerId(),
-                        'title' => (string) $event->title(),
-                        'message' => (string) $event->message(),
+                HolidayCreated::class => function (array $state, HolidayCreated $event) use ($pdo) {
+                    $pdo->insert(Table::READ_HOLIDAY, [
+                        'id' => $event->holidayId()->toString(),
+                        'start' => $event->start()->format('Y-m-d H:i:s'),
                         'created' => $event->createdAt()->format('Y-m-d H:i:s'),
                         'updated' => $event->createdAt()->format('Y-m-d H:i:s'),
-                        'state' => (string) $event->state()
+                        'state' => $event->state()->toString()
                     ]);
                 },
             ])

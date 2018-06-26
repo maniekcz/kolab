@@ -5,7 +5,7 @@ prooph_event_store:
             repositories:
                 holiday:
                     repository_class: Kolab\Holiday\Infrastructure\Repository\EventStoreHolidays
-                    aggregate_type: Kolab\Holiday\Model\Holiday
+                    aggregate_type: Kolab\Holiday\Domain\Holiday
                     aggregate_translator: prooph_event_sourcing.aggregate_translator
 
 services:

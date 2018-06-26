@@ -29,7 +29,7 @@ final class Holiday extends BaseAggregateRoot
 
     protected function aggregateId(): string
     {
-        $this->holidayId->toString();
+        return $this->holidayId()->toString();
     }
 
     public function holidayId(): HolidayId

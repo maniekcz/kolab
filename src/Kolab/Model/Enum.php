@@ -4,10 +4,10 @@ namespace Kolab\Model;
 
 use MyCLabs\Enum\Enum as EnumClabs;
 
-class Enum extends EnumClabs
+abstract class Enum extends EnumClabs
 {
     public static function byName($name) {
-        return new self($name);
+        return new static($name);
     }
 
     public function toString()

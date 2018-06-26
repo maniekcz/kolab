@@ -1,7 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    - { resource: "@AppBundle/Resources/config/service_bus.yml" }
+    - { resource: '@AppBundle/Resources/config/service_bus.yml' }
     - { resource: '@AppBundle/Resources/config/event_store.yml' }
     - { resource: '@AppBundle/Resources/config/projections.yml' }
     - { resource: '@AppBundle/Resources/config/services.yml' }
@@ -77,5 +77,45 @@ doctrine_migrations:
     name: Application Migrations
     organize_migrations: false # Version >=1.2 Possible values are: "BY_YEAR", "BY_YEAR_AND_MONTH", false
 
+fos_rest:
+    versioning: true
+    routing_loader:
+        include_format: true
+        default_format: json
+    param_fetcher_listener: force
+    allowed_methods_listener: true
+#    disable_csrf_role: ROLE_USER
+#    exception:
+#        exception_controller: 'kolab.exception.controller:showAction'
+#        codes: ~
+#        messages: ~
+    format_listener:
+        rules:
+            - { path: '^/api', priorities: ['json'], fallback_format: json, prefer_extension: true }
+            - { path: '^/', stop: true }
+    view:
+        view_response_listener: 'force'
+        formats:
+            json: true
+
+jms_serializer:
+    visitors:
+        json:
+            options: JSON_PRETTY_PRINT
+    metadata:
+        auto_detection: true
+        debug: true
+        directories:
+#            CycleRead:
+#                namespace_prefix: "TestArmy\\Cycle\\Infrastructure\\Projection"
+#                path: "@AppBundle/Resources/config/serializer/Cycle"
+
+nelmio_cors:
+    paths:
+        '^/api/':
+            allow_origin: ['*']
+            allow_headers: ['*']
+            allow_methods: ['POST', 'PUT', 'GET', 'DELETE', 'PATCH']
+            max_age: 3600
 
 
