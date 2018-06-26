@@ -1,35 +1,36 @@
 <?php
 namespace Tests\Kolab\Holiday;
 
+use Kolab\Holiday\Domain\Event\HolidayApproved;
 use Kolab\Holiday\Domain\Event\HolidayCreated;
 use Kolab\Holiday\Domain\Holiday;
+use Kolab\Holiday\Domain\HolidayId;
+use Kolab\Holiday\Domain\HolidayState;
 use PHPUnit\Framework\TestCase;
 use Tests\Kolab\EventSourcingScenario;
 
-class CycleTest extends TestCase
+class HolidayTest extends TestCase
 {
-    public function testCreateMobileEnv()
+    public function testApproveHoliday()
     {
         $scenario = new EventSourcingScenario(Holiday::class, $this);
 
+        $holidayId = HolidayId::generate();
+
         $scenario
             ->givenEvents([
-                HolidayCreated::withData($cycleId)
+                HolidayCreated::withData($holidayId, HolidayState::NEW(), new \DateTime('2017-12-12'))
             ])
             ->when(function (Holiday $holiday) {
-                $cycle->createEnvironment($environmentData);
+                $holiday->approve();
             })
             ->expectExactEvents([
-                MobileEnvironmentCreated::withData(
-                    $cycleId,
-                    $environmentData['type'],
-                    $environmentData['dimension'],
-                    $environmentData['links'],
-                    $environmentData['systems'],
-                    $environmentData['devices']
+                HolidayApproved::withData(
+                    $holidayId,
+                    HolidayState::APPROVED()
                 ),
             ])
-            ->expectValue(Dimension::SYSTEMS, $scenario->getAggregateRoot()->environment()->dimension());
+            ->expectValue(HolidayState::APPROVED(), $scenario->getAggregateRoot()->state());
     }
 
 

@@ -37,6 +37,11 @@ final class Holiday extends BaseAggregateRoot
         return $this->holidayId;
     }
 
+    public function state(): HolidayState
+    {
+        return $this->state;
+    }
+
     public static function create(HolidayId $holidayId, DateTime $start): Holiday
     {
         $self = new self();
@@ -50,7 +55,7 @@ final class Holiday extends BaseAggregateRoot
         return $self;
     }
 
-    public function approveHoliday(): void
+    public function approve(): void
     {
         $this->recordThat(HolidayApproved::withData(
             $this->holidayId(),

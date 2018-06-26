@@ -39,7 +39,7 @@ class HolidayApproved extends AggregateChanged
         return $this->holidayId;
     }
 
-    public function state(): DateTime
+    public function state(): HolidayState
     {
         if (! $this->state) {
             $this->state = HolidayState::byName($this->payload['state']);
