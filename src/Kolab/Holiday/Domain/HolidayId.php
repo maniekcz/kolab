@@ -21,7 +21,7 @@ final class HolidayId
 
     public static function fromString(string $holidayId): HolidayId
     {
-        return new self(Uuid::fromString($todoId));
+        return new self(Uuid::fromString($holidayId));
     }
 
     private function __construct(UuidInterface $uuid)

@@ -1,21 +1,12 @@
 prooph_event_store:
     stores:
-        todo_store:
+        holiday_store:
             event_store: Prooph\EventStore\Pdo\MySqlEventStore
             repositories:
-                todo_list:
+                holiday:
                     repository_class: Kolab\Holiday\Infrastructure\Repository\EventStoreHolidays
                     aggregate_type: Kolab\Holiday\Model\Holiday
                     aggregate_translator: prooph_event_sourcing.aggregate_translator
-    projection_managers:
-        todo_projection_manager:
-            event_store: Prooph\EventStore\Pdo\MySqlEventStore # event store
-            connection: 'doctrine.pdo.connection'
-            projections:
-                user_projection:
-                    read_model: Prooph\ProophessorDo\Projection\User\UserReadModel
-                    projection: Prooph\ProophessorDo\Projection\User\UserProjection
-
 
 services:
     Prooph\EventStore\Pdo\MySqlEventStore:

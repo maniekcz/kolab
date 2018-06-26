@@ -1,11 +1,11 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    # - { resource: "@AppBundle/Resources/config/service_bus.yml" }
-    # - { resource: '@AppBundle/Resources/config/event_store.yml' }
-    # - { resource: '@AppBundle/Resources/config/projections.yml' }
-    # - { resource: '@AppBundle/Resources/config/services.yml' }
-    # - { resource: '@AppBundle/Resources/config/voters.yml' }
+    - { resource: "@AppBundle/Resources/config/service_bus.yml" }
+    - { resource: '@AppBundle/Resources/config/event_store.yml' }
+    - { resource: '@AppBundle/Resources/config/projections.yml' }
+    - { resource: '@AppBundle/Resources/config/services.yml' }
+    #- { resource: '@AppBundle/Resources/config/voters.yml' }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -69,4 +69,13 @@ swiftmailer:
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
+
+doctrine_migrations:
+    dir_name: "%kernel.root_dir%/DoctrineMigrations"
+    namespace: Application\Migrations
+    table_name: migration_versions
+    name: Application Migrations
+    organize_migrations: false # Version >=1.2 Possible values are: "BY_YEAR", "BY_YEAR_AND_MONTH", false
+
+
 

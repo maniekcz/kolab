@@ -23,15 +23,15 @@
         "php": "^7.1",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-cache-bundle": "^1.2",
-        "doctrine/doctrine-migrations-bundle": "^2.0",
+        "doctrine/orm": "^2.5",
+        "incenteev/composer-parameter-handler": "^2.0",
+        "myclabs/php-enum": "^1.6",
+        "phpunit/phpunit": "^7.2",
         "prooph/event-sourcing": "^5.2",
         "prooph/event-store-bus-bridge": "^3.0",
-        "prooph/event-store-http-middleware": "^0.2.0",
         "prooph/event-store-symfony-bundle": "^0.4",
         "prooph/pdo-event-store": "^1.0",
         "prooph/service-bus-symfony-bundle": "^0.6",
-        "doctrine/orm": "^2.5",
-        "incenteev/composer-parameter-handler": "^2.0",
         "sensio/distribution-bundle": "^5.0.19",
         "sensio/framework-extra-bundle": "^5.0.0",
         "symfony/monolog-bundle": "^3.1.0",
@@ -42,7 +42,7 @@
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^3.0"
+        "symfony/phpunit-bridge": "^4.1"
     },
     "scripts": {
         "symfony-scripts": [
