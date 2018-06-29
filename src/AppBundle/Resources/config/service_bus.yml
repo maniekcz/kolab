@@ -23,15 +23,5 @@ prooph_service_bus:
             router:
                 type: 'prooph_service_bus.event_bus_router'
                 routes:
-                #    'TestArmy\Company\Domain\Event\CompanyWasDeleted':
-                #        - '@test_army.project.remove_by_companyid'
-services:
-    kolab.holiday.create.handler:
-        class: Kolab\Holiday\Application\Command\Handler\CreateHolidayHandler
-        arguments: ['@holiday']
-    kolab.holiday.list.handler:
-        class: Kolab\Holiday\Application\Query\Handler\ListHolidaysHandler
-        arguments: ['@projection.finder.holiday']
-    kolab.holiday.get.handler:
-        class: Kolab\Holiday\Application\Query\Handler\GetHolidayHandler
-        arguments: ['@projection.finder.holiday']
+                    'TestArmy\Company\Domain\Event\HolidayApproved':
+                        - '@kolab.holiday.send_confirmation'

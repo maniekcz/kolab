@@ -3,6 +3,7 @@ Kolab\Holiday\Infrastructure\Projection\HolidayRead:
     properties:
         holidayId:
             type: string
+            name: holidayId
         customerId:
             type: string
         start:

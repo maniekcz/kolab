@@ -1,4 +1,16 @@
 services:
+    kolab.holiday.create.handler:
+        class: Kolab\Holiday\Application\Command\Handler\CreateHolidayHandler
+        arguments: ['@holiday']
+    kolab.holiday.list.handler:
+        class: Kolab\Holiday\Application\Query\Handler\ListHolidaysHandler
+        arguments: ['@projection.finder.holiday']
+    kolab.holiday.get.handler:
+        class: Kolab\Holiday\Application\Query\Handler\GetHolidayHandler
+        arguments: ['@projection.finder.holiday']
+    kolab.holiday.send_confirmation:
+        class: Kolab\Holiday\Domain\ProcessManager\SendConfirmationProcessManager
+        arguments: ['@prooph_service_bus.kolab.command_bus']
     kolab.holiday.param_converter:
         class: AppBundle\ParamConverter\HolidayParamConverter
         arguments: ['@prooph_service_bus.kolab.query_bus']
