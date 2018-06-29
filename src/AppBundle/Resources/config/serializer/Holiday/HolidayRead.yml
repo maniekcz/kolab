@@ -1,0 +1,11 @@
+Kolab\Holiday\Infrastructure\Projection\HolidayRead:
+    exclusion_policy: ALL
+    properties:
+        holidayId:
+            type: string
+        customerId:
+            type: string
+        start:
+            type:  DateTime<'Y-m-d'>
+        state:
+            type: string

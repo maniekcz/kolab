@@ -15,6 +15,7 @@ final class Version20180626165141 extends AbstractMigration
     {
         $table = $schema->createTable(Table::READ_HOLIDAY);
         $table->addColumn('id', 'string', ['length' => 36]);
+        $table->addColumn('customer_id', 'string', ['length' => 36]);
         $table->addColumn('start', 'datetime');
         $table->addColumn('state', 'string');
         $table->addColumn('created', 'datetime');

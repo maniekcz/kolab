@@ -33,6 +33,7 @@
         "prooph/event-store-symfony-bundle": "^0.5.0",
         "prooph/pdo-event-store": "^1.0",
         "prooph/service-bus-symfony-bundle": "^0.6",
+        "react/promise": "^2.7",
         "sensio/distribution-bundle": "^5.0.19",
         "sensio/framework-extra-bundle": "^5.0.0",
         "symfony/monolog-bundle": "^3.1.0",

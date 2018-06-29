@@ -5,7 +5,7 @@ prooph_service_bus:
             router:
                 type: 'prooph_service_bus.command_bus_router'
                 routes:
-                    'Kolab\Holiday\Application\Command\CreateHoliday': '@kolab.holiday.create_handler'
+                    'Kolab\Holiday\Application\Command\CreateHoliday': '@kolab.holiday.create.handler'
     query_buses:
         kolab.query_bus:
             message_factory: 'prooph_service_bus.message_factory'
@@ -14,9 +14,10 @@ prooph_service_bus:
             router:
                 type: 'prooph_service_bus.query_bus_router'
                 routes:
-                #    'TestArmy\Tester\Application\Query\GetTesterProfile': '@test_army.tester.query.handler.profile'
+                    'Kolab\Holiday\Application\Query\ListHolidays': '@kolab.holiday.list.handler'
+                    'Kolab\Holiday\Application\Query\GetHoliday': '@kolab.holiday.get.handler'
     event_buses:
-        kolab_event_bus:
+        kolab.event_bus:
             plugins:
                 - 'prooph_service_bus.on_event_invoke_strategy'
             router:
@@ -25,6 +26,12 @@ prooph_service_bus:
                 #    'TestArmy\Company\Domain\Event\CompanyWasDeleted':
                 #        - '@test_army.project.remove_by_companyid'
 services:
-    kolab.holiday.create_handler:
+    kolab.holiday.create.handler:
         class: Kolab\Holiday\Application\Command\Handler\CreateHolidayHandler
         arguments: ['@holiday']
+    kolab.holiday.list.handler:
+        class: Kolab\Holiday\Application\Query\Handler\ListHolidaysHandler
+        arguments: ['@projection.finder.holiday']
+    kolab.holiday.get.handler:
+        class: Kolab\Holiday\Application\Query\Handler\GetHolidayHandler
+        arguments: ['@projection.finder.holiday']

@@ -106,9 +106,9 @@ jms_serializer:
         auto_detection: true
         debug: true
         directories:
-#            CycleRead:
-#                namespace_prefix: "TestArmy\\Cycle\\Infrastructure\\Projection"
-#                path: "@AppBundle/Resources/config/serializer/Cycle"
+            HolidayRead:
+                namespace_prefix: "Kolab\\Holiday\\Infrastructure\\Projection"
+                path: "@AppBundle/Resources/config/serializer/Holiday"
 
 nelmio_cors:
     paths:

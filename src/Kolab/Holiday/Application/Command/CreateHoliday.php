@@ -2,6 +2,7 @@
 
 namespace Kolab\Holiday\Application\Command;
 
+use Kolab\Customer\Domain\CustomerId;
 use Kolab\Holiday\Domain\HolidayId;
 use \DateTime;
 use Prooph\Common\Messaging\Command;
@@ -14,17 +15,24 @@ class CreateHoliday extends Command implements PayloadConstructable
 
     /**
      * @param string $holidayId
+     * @param string $customerId
      * @param string $start
      * @return CreateHoliday
      */
-    public static function withData(string $holidayId, string $start): CreateHoliday
+    public static function withData(string $holidayId, string $customerId, string $start): CreateHoliday
     {
         return new self(
             [
                 'holidayId' => $holidayId,
+                'customerId' => $customerId,
                 'start' => $start
             ]
         );
+    }
+
+    public function customerId(): CustomerId
+    {
+        return CustomerId::fromString($this->payload['customerId']);
     }
 
     public function holidayId(): HolidayId

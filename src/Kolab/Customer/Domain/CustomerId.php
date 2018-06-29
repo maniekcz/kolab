@@ -2,26 +2,26 @@
 
 declare(strict_types=1);
 
-namespace Kolab\Holiday\Domain;
+namespace Kolab\Customer\Domain;
 
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
-final class HolidayId
+final class CustomerId
 {
     /**
      * @var UuidInterface
      */
     private $uuid;
 
-    public static function generate(): HolidayId
+    public static function generate(): CustomerId
     {
         return new self(Uuid::uuid4());
     }
 
-    public static function fromString(string $holidayId): HolidayId
+    public static function fromString(string $customerId): CustomerId
     {
-        return new self(Uuid::fromString($holidayId));
+        return new self(Uuid::fromString($customerId));
     }
 
     private function __construct(UuidInterface $uuid)
@@ -39,7 +39,7 @@ final class HolidayId
         return $this->uuid->toString();
     }
 
-    public function sameValueAs(HolidayId $other): bool
+    public function sameValueAs(CustomerId $other): bool
     {
         return get_class($this) === get_class($other) && $this->uuid->equals($other->uuid);
     }

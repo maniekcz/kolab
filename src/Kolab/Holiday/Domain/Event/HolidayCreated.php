@@ -3,6 +3,7 @@
 namespace Kolab\Holiday\Domain\Event;
 
 use DateTime;
+use Kolab\Customer\Domain\CustomerId;
 use Kolab\Holiday\Domain\Holiday;
 use Kolab\Holiday\Domain\HolidayId;
 use Kolab\Holiday\Domain\HolidayState;
@@ -16,6 +17,10 @@ class HolidayCreated extends AggregateChanged
     private $holidayId;
 
     /**
+     * @var CustomerId
+     */
+    private $customerId;
+    /**
      * @var HolidayState
      */
     private $state;
@@ -27,18 +32,21 @@ class HolidayCreated extends AggregateChanged
 
     /**
      * @param HolidayId $holidayId
+     * @param CustomerId $customerId
      * @param HolidayState $state
      * @param DateTime $start
      * @return HolidayCreated
      */
-    public static function withData(HolidayId $holidayId, HolidayState $state, DateTime $start): HolidayCreated
+    public static function withData(HolidayId $holidayId, CustomerId $customerId, HolidayState $state, DateTime $start): HolidayCreated
     {
         /** @var self $event */
         $event = self::occur($holidayId->toString(), [
+            'customerId' => $customerId->toString(),
             'state' => $state->toString(),
             'start' => $start->format('Y-m-d')
         ]);
 
+        $event->customerId = $customerId;
         $event->holidayId = $holidayId;
         $event->state = $state;
 
@@ -55,6 +63,18 @@ class HolidayCreated extends AggregateChanged
         }
         return $this->holidayId;
     }
+
+    /**
+     * @return CustomerId
+     */
+    public function customerId(): CustomerId
+    {
+        if (! $this->customerId) {
+            $this->customerId = CustomerId::fromString($this->payload['customerId']);
+        }
+        return $this->customerId;
+    }
+
 
     /**
      * @return HolidayState

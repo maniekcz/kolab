@@ -36,6 +36,7 @@ class HolidayProjectionRunner implements Projections
                 HolidayCreated::class => function (array $state, HolidayCreated $event) use ($pdo) {
                     $pdo->insert(Table::READ_HOLIDAY, [
                         'id' => $event->holidayId()->toString(),
+                        'customer_id' => $event->customerId()->toString(),
                         'start' => $event->start()->format('Y-m-d H:i:s'),
                         'created' => $event->createdAt()->format('Y-m-d H:i:s'),
                         'updated' => $event->createdAt()->format('Y-m-d H:i:s'),

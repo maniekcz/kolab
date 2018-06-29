@@ -7,6 +7,7 @@ namespace Kolab\Holiday\Domain;
 
 use DateTime;
 use Kolab\BaseAggregateRoot;
+use Kolab\Customer\Domain\CustomerId;
 use Kolab\Holiday\Domain\Event\HolidayCreated;
 use Kolab\Holiday\Domain\Event\HolidayApproved;
 
@@ -42,12 +43,13 @@ final class Holiday extends BaseAggregateRoot
         return $this->state;
     }
 
-    public static function create(HolidayId $holidayId, DateTime $start): Holiday
+    public static function create(HolidayId $holidayId, CustomerId $customerId, DateTime $start): Holiday
     {
         $self = new self();
 
         $self->recordThat(HolidayCreated::withData(
             $holidayId,
+            $customerId,
             HolidayState::NEW(),
             $start
         ));

@@ -1,6 +1,7 @@
 <?php
 namespace Tests\Kolab\Holiday;
 
+use Kolab\Customer\Domain\CustomerId;
 use Kolab\Holiday\Domain\Event\HolidayApproved;
 use Kolab\Holiday\Domain\Event\HolidayCreated;
 use Kolab\Holiday\Domain\Holiday;
@@ -19,7 +20,11 @@ class HolidayTest extends TestCase
 
         $scenario
             ->givenEvents([
-                HolidayCreated::withData($holidayId, HolidayState::NEW(), new \DateTime('2017-12-12'))
+                HolidayCreated::withData(
+                    $holidayId,
+                    CustomerId::generate(),
+                    HolidayState::NEW(),
+                    new \DateTime('2017-12-12'))
             ])
             ->when(function (Holiday $holiday) {
                 $holiday->approve();

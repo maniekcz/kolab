@@ -14,4 +14,5 @@ class HolidayState extends Enum
     const NEW = 'NEW';
     const APPROVED = 'APPROVED';
     const REJECTED = 'REJECTED';
+    const DELETED = 'DELETED';
 }

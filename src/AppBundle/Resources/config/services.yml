@@ -1,0 +1,6 @@
+services:
+    kolab.holiday.param_converter:
+        class: AppBundle\ParamConverter\HolidayParamConverter
+        arguments: ['@prooph_service_bus.kolab.query_bus']
+        tags:
+            - { name: request.param_converter, priority: 2, converter: holiday_converter }

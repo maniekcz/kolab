@@ -6,7 +6,8 @@ use MyCLabs\Enum\Enum as EnumClabs;
 
 abstract class Enum extends EnumClabs
 {
-    public static function byName($name) {
+    public static function byName($name)
+    {
         return new static($name);
     }
 

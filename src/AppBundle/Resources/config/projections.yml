@@ -5,6 +5,6 @@ services:
     projection.holiday:
         class: Kolab\Holiday\Infrastructure\Projection\HolidayProjectionRunner
         arguments: ['@projection_manager', '@doctrine.dbal.default_connection']
-    projection.finder.invitation:
+    projection.finder.holiday:
         class: Kolab\Holiday\Infrastructure\Projection\HolidayFinder
         arguments: ['@doctrine.dbal.default_connection']

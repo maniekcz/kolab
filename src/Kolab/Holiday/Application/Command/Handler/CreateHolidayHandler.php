@@ -26,6 +26,7 @@ final class CreateHolidayHandler
     {
         $holiday = Holiday::create(
             $command->holidayId(),
+            $command->customerId(),
             $command->start()
         );
         $this->holidays->save($holiday);
